@@ -22,12 +22,10 @@ def predict():
     matrix = cv.fit_transform(doc)
     
     df = pd.DataFrame(matrix.toarray() , columns =cv.get_feature_names() , index = ['doc1' , 'doc2'] )
-    prediction=cosine_similarity(doc1.reshape(1,-1),doc2.reshape(1,-1))
-    if round(prediction[0],2)==1.0:
-        output = 'no similarity between the given 2 docs'
-    else:
-        output = 'similarity between the given 2 docs'
-    return render_template('index.html',prediction_text='There is {}'.format(output))
+    prediction=cosine_similarity(matrix[0].reshape(1,-1),matrix[1].reshape(1,-1))
+    output = round(prediction[0],2)
+    
+    return render_template('index.html',prediction_text='The similarity between the docs are: {}'.format(output))
 
 if __name__ == "__main__":
     app.run(debug=True)
