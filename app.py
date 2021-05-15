@@ -23,7 +23,7 @@ def predict():
     
     df = pd.DataFrame(matrix.toarray() , columns =cv.get_feature_names() , index = ['doc1' , 'doc2'] )
     prediction=cosine_similarity(matrix[0].reshape(1,-1),matrix[1].reshape(1,-1))
-    output = round(prediction[0],2)
+    output = prediction[0]
     
     return render_template('index.html',prediction_text='The similarity between the docs are: {}'.format(output))
 
